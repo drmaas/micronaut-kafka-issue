@@ -1,0 +1,18 @@
+kafka:
+  bootstrap:
+    servers: localhost:9092
+  streams:
+    stream-1:
+      application:
+        id: stream1-app
+    # replace with default to make this work
+    # and remove @Named("stream-2") from StreamFactory
+    stream-2:
+      application:
+        id: stream2-app
+#    default:
+#      application:
+#        id: stream2-app
+
+topic1: topic1
+topic2: topic2

@@ -1,0 +1,44 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "6.0.0"
+    id "application"
+}
+
+version "0.1"
+group "org.example"
+mainClassName = "org.example.MicronautKafkaIssueApp"
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+configurations {
+    // for dependencies that are needed for development only
+    developmentOnly
+}
+
+ext {
+    micronautVersion = '2.0.1'
+}
+
+dependencies {
+    annotationProcessor(platform("io.micronaut:micronaut-bom:$micronautVersion"))
+    annotationProcessor("io.micronaut:micronaut-inject-java")
+    implementation(platform("io.micronaut:micronaut-bom:$micronautVersion"))
+    implementation("io.micronaut:micronaut-inject")
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("org.apache.kafka:kafka-streams:2.5.1")
+    implementation("io.micronaut.kafka:micronaut-kafka-streams")
+
+    runtimeOnly("ch.qos.logback:logback-classic")
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion('14')
+    targetCompatibility = JavaVersion.toVersion('14')
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
